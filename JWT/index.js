@@ -17,6 +17,10 @@ app.set("views", "./views");
 ConnectToDb();
 
 app.use("/", auth);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+});
 app.listen(3000, () => {
   console.log("Server Started");
 });
