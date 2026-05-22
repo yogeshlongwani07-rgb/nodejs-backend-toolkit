@@ -1,4 +1,5 @@
 Server-Api/node_modules/
 JWT-MVC-Mongoose/node_modules/
 STREAMS/node_modules/
-Cluster/node_modules
+Cluster/node_modules/
+Multer/node_modules/
