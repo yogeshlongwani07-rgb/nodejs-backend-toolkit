@@ -2,22 +2,18 @@ const express = require("express");
 const app = express();
 const Router = express.Router();
 const jwt = require("jsonwebtoken");
+
 const bcrypt = require("bcrypt");
 const userModel = require("../Models/Schema");
-
-function checkAuth(req, res, next) {
-  const token = req?.cookies?.token;
-  if (!token) {
-    res.redirect("/login");
-  }
-  const decode = jwt.verify(token, "Hello");
-  req.user = decode;
-
-  next();
-}
+const secret = "MysecretKey";
+const { checkAdmin, checkAuth } = require("../Middlewares/Auth");
 
 Router.get("/profile", checkAuth, (req, res) => {
-  res.send("You are at Profile Section");
+  res.send(`Your are at ${req.user.username} Profile Page`);
+});
+
+Router.get("/admin", checkAuth, checkAdmin, (req, res) => {
+  res.send("You are at admin page");
 });
 
 Router.get("/signup", (req, res) => {
@@ -29,24 +25,23 @@ Router.get("/login", (req, res) => {
 });
 
 Router.post("/signup", async (req, res, next) => {
-  const { username, password, email } = req.body;
-  if (!username || !password || !email) {
-    res.redirect("/signup");
+  const { username, password, email, role } = req.body;
+  if (!username || !password || !email || !role) {
+    return res.redirect("/signup");
   }
   try {
     const hash = await bcrypt.hash(password, 10);
-    const token = jwt.sign(
-      { username: username, email: email, password: hash },
-      "Hello",
-      { expiresIn: "7d" },
-    );
+    const token = jwt.sign({ username: username, role: role }, secret, {
+      expiresIn: "7d",
+    });
 
     await userModel.create({
       username: username,
       email: email,
+      role: role,
       password: hash,
     });
-    res.cookie("token", token);
+    res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
     res.redirect("/profile");
   } catch (err) {
     next(err);
@@ -56,25 +51,32 @@ Router.post("/signup", async (req, res, next) => {
 Router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    res.redirect("/login");
+    return res.redirect("/login");
   }
   try {
     const user = await userModel.findOne({ email: email });
     const passcheck = await bcrypt.compare(password, user.password);
     if (passcheck) {
       const token = jwt.sign(
-        { username: user.username, email: user.email, password: user.password },
-        "Hello",
-        { expiresIn: "7d" },
+        { username: user.username, role: user.role },
+        secret,
+        {
+          expiresIn: "7d",
+        },
       );
-      res.cookie("token", token);
+      res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
       res.redirect("/profile");
     } else {
-      res.redirect("/login");
+      return res.redirect("/login");
     }
   } catch (err) {
     next(err);
   }
+});
+
+Router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/login");
 });
 
 module.exports = Router;
