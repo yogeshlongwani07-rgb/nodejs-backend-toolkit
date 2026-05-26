@@ -5,3 +5,5 @@ Cluster/node_modules/
 Multer/node_modules/
 URL-Shortner/node_modules/
 Web-Socket/node_modules
+JWT-MVC-SQL/node_modules/
+GraphQL/node_modules/
