@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+        <tr>
+      <th>UserName</th>
+      <th>Email</th>
+      <th>Password</th>
+
+      </tr>
+      <% for(user of result) { %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                <td><%= user.password %></td>
+                <td><form action="/user/<%= user.id %>" method="get"> <button>Edit</button></form></td>
+                <td><form action="/user/delete/<%= user.id %>" method="post"> <button>Delete</button></form></td>
+            </tr>
+        <% } %>
+    </table>
+  </body>
+</html>
