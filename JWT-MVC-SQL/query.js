@@ -4,12 +4,27 @@ const mysql = require("mysql2");
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: "firsttable",
+  database: "college",
   password: "9571862527",
 });
 
+let data = [];
+let createRandomUser = () => {
+  return [
+    faker.internet.username(),
+    faker.internet.email(),
+    faker.internet.password(),
+  ];
+};
+
+for (let i = 0; i < 50; i++) {
+  data.push(createRandomUser());
+}
+
+let q = "insert into users (username, email, password) values ?";
+
 try {
-  db.query("show tables", (err, results) => {
+  db.query(q, [data], (err, results) => {
     if (err) throw err;
     console.log(results);
   });
@@ -18,13 +33,3 @@ try {
 }
 
 db.end();
-let createRandomUser = () => {
-  return {
-    userId: faker.string.uuid(),
-    username: faker.internet.username(),
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-  };
-};
-
-console.log(createRandomUser());
