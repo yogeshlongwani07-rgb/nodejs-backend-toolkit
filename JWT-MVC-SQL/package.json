@@ -1,19 +1,7 @@
 {
   "dependencies": {
-    "@faker-js/faker": "^10.4.0",
-    "init": "^0.1.2",
-    "mysql2": "^3.22.3",
-    "nodemon": "^3.1.14"
-  },
-  "name": "jwt-mvc-sql",
-  "version": "1.0.0",
-  "description": "",
-  "main": "query.js",
-  "scripts": {
-    "dev": "nodemon query.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.4"
+  }
 }
