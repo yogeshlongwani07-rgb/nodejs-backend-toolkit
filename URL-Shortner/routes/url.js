@@ -4,7 +4,7 @@ const {
   handleGetShortUrl,
   counterForVisitedUrl,
 } = require("../controllers/url");
-const URL = require("../models/url");
+const URL = require("../models/Schema");
 
 router.post("/", handleGetShortUrl);
 router.get("/:shortId", async (req, res) => {

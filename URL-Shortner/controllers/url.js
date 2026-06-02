@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-const URL = require("../models/url");
+const URL = require("../models/Schema");
 
 async function handleGetShortUrl(req, res) {
   const body = req.body;
