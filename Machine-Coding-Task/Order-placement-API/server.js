@@ -1,17 +1,14 @@
 const mongoose = require("mongoose");
-const app = require("./app");
 
 function connectToDb() {
   mongoose
-    .connect("mongodb://localhost:27017/orders")
+    .connect("mongodb://127.0.0.1:27017/place")
     .then(() => {
-      console.log("connected");
-      app.listen(3000, () => {
-        console.log("port working");
-      });
+      console.log("db connected");
     })
     .catch(() => {
-      console.log("Something wrong with DB");
+      console.log("something went wrong with db");
     });
 }
-connectToDb();
+
+module.exports = connectToDb;
