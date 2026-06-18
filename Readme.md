@@ -1,200 +1,229 @@
-<div align="center">
-
 # 🚀 Node.js Backend Toolkit
 
-### A complete collection of Node.js backend projects, concepts, and real-world implementations.
+> A collection of production-ready Node.js backend projects covering authentication, databases, file uploads, GraphQL, WebSockets, clustering, streaming, and machine coding challenges.
 
-<p align="center">
-  Learn • Build • Experiment • Master
-</p>
-
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-black?style=for-the-badge&logo=express)
-![MongoDB](https://img.shields.io/badge/MongoDB-13AA52?style=for-the-badge&logo=mongodb&logoColor=white)
-![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
-![Kafka](https://img.shields.io/badge/Apache_Kafka-000000?style=for-the-badge&logo=apachekafka)
+![Node.js](https://img.shields.io/badge/Node.js-22+-green?style=for-the-badge&logo=node.js)
+![Express](https://img.shields.io/badge/Express.js-Backend-black?style=for-the-badge&logo=express)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-green?style=for-the-badge&logo=mongodb)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge&logo=mysql)
+![GraphQL](https://img.shields.io/badge/GraphQL-API-pink?style=for-the-badge&logo=graphql)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-</div>
-
 ---
 
-# 📖 About
+## 📚 About
 
-This repository is a **backend development playground** built using **Node.js**.
+This repository is a complete backend learning toolkit built with **Node.js** and **Express.js**.
 
-Instead of being a single project, it contains multiple independent implementations that cover the most important backend concepts used in real-world applications.
+Instead of focusing on a single project, it contains multiple independent projects demonstrating real-world backend concepts, interview questions, machine coding tasks, and production-ready implementations.
 
-Whether you're learning Node.js from scratch or revising backend development before interviews, this repository provides practical examples for each topic.
-
----
-
-# ✨ Features
-
-- 🌐 Express.js REST APIs
-- 🔐 JWT Authentication
-- 🧩 MVC Architecture
-- 🍃 MongoDB & Mongoose
-- 📂 File Uploads (Multer)
-- 📡 WebSockets
-- ⚡ Redis Integration
-- 📨 Apache Kafka
-- 📊 SQL Examples
-- 🔄 Streams & Buffer Handling
-- 🚀 Node.js Cluster Module
-- 🌍 GraphQL Backend + Frontend
-- 📁 File System (fs Module)
-- 🔥 Pure Node.js HTTP Server Examples
+Whether you're preparing for interviews or learning backend development, this repository provides practical examples for every major backend topic.
 
 ---
 
 # 📂 Repository Structure
 
-```text
+```
 Nodejs-Backend-Toolkit
 │
-├── Base-Server/
-│   ├── Node.js HTTP Server
-│   └── Express Server
-│
-├── Cluster/
-│   └── Node.js Cluster Module
-│
-├── GraphQL/
-│   ├── Backend
-│   └── React + Vite Frontend
-│
-├── JWT-MVC-Mongoose/
-│   ├── Authentication
-│   ├── Authorization
-│   ├── MVC Pattern
-│   └── MongoDB
-│
-├── Kafka/
-│
-├── Redis/
-│
-├── SQL/
-│
-├── Multer/
-│
-├── Streaming/
-│
-├── Web-Socket/
-│
-├── Machine-Coding-Task/
-│
-└── fs/
+├── Base-Server
+├── JWT-MVC-Mongoose
+├── SQL
+├── GraphQL
+├── Multer
+├── Streaming
+├── Cluster
+├── Web-Socket
+└── Machine-Coding-Task
 ```
 
 ---
 
-# 🛠️ Tech Stack
+# ✨ Features
 
-| Category       | Technologies  |
-| -------------- | ------------- |
-| Runtime        | Node.js       |
-| Framework      | Express.js    |
-| Database       | MongoDB, SQL  |
-| ODM            | Mongoose      |
-| Authentication | JWT           |
-| API            | REST, GraphQL |
-| Messaging      | Apache Kafka  |
-| Cache          | Redis         |
-| File Upload    | Multer        |
-| Realtime       | WebSocket     |
-| Frontend       | React + Vite  |
+## Authentication
+
+- JWT Authentication
+- Login & Register APIs
+- Password Hashing
+- Protected Routes
+- MVC Architecture
 
 ---
 
-# 🚀 Getting Started
+## Database
 
-## Clone the Repository
+### MongoDB
+
+- Mongoose
+- CRUD Operations
+- Relationships
+- Validation
+
+### SQL
+
+- MySQL
+- CRUD
+- Joins
+- Queries
+
+---
+
+## GraphQL
+
+- GraphQL Server
+- Queries
+- Mutations
+- Apollo Server
+- Frontend Example
+
+---
+
+## File Upload
+
+- Multer
+- Image Upload
+- Static File Serving
+
+---
+
+## Streaming
+
+- File Streaming
+- Video Streaming
+- Efficient Data Transfer
+
+---
+
+## Cluster
+
+- Multi-Core Processing
+- Performance Optimization
+- Worker Processes
+
+---
+
+## WebSocket
+
+- Real-Time Communication
+- Socket Connections
+- Live Messaging
+
+---
+
+## Machine Coding Tasks
+
+Includes solutions for:
+
+- URL Shortener
+- Pagination
+- Infinite Scroll
+- Order Placement API
+
+---
+
+# 🛠 Tech Stack
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- MySQL
+- GraphQL
+- Apollo Server
+- JWT
+- Multer
+- Socket.io
+- JavaScript (ES6+)
+
+---
+
+# 📦 Installation
+
+Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/nodejs-backend-toolkit.git
+git clone https://github.com/your-username/Nodejs-Backend-Toolkit.git
 ```
+
+Move inside
 
 ```bash
-cd nodejs-backend-toolkit
+cd Nodejs-Backend-Toolkit
 ```
 
----
-
-## Install Dependencies
-
-Navigate to the project you want to run.
-
-Example:
+Choose any project
 
 ```bash
 cd JWT-MVC-Mongoose
+```
+
+Install dependencies
+
+```bash
 npm install
 ```
 
-or
-
-```bash
-cd GraphQL/backend
-npm install
-```
-
----
-
-## Run the Project
-
-```bash
-npm start
-```
-
-or
+Run
 
 ```bash
 npm run dev
 ```
 
-depending on the project.
+or
+
+```bash
+npm start
+```
 
 ---
 
-# 📚 Topics Covered
+# 📖 Projects Overview
 
-- Node.js Fundamentals
-- Express.js
-- Routing
-- Middleware
-- REST APIs
-- Authentication
-- Authorization
-- MVC Pattern
+| Project              | Description                     |
+| -------------------- | ------------------------------- |
+| Base-Server          | Basic Express server setup      |
+| JWT-MVC-Mongoose     | Authentication with JWT and MVC |
+| SQL                  | MySQL CRUD operations           |
+| GraphQL              | GraphQL backend + frontend      |
+| Multer               | File upload APIs                |
+| Streaming            | Video/File streaming            |
+| Cluster              | Node.js clustering              |
+| Web-Socket           | Real-time communication         |
+| Machine Coding Tasks | Backend interview problems      |
+
+---
+
+# 🎯 Learning Outcomes
+
+After completing these projects you'll understand:
+
+- REST API Development
+- Authentication & Authorization
 - MongoDB
-- Mongoose
-- SQL
-- GraphQL
+- MySQL
+- GraphQL APIs
+- File Upload
+- Streaming
 - WebSockets
-- Streams
-- Buffers
-- File Uploads
-- Redis
-- Kafka
-- Cluster Module
-- File System
+- Backend Architecture
+- MVC Pattern
 - Error Handling
-- Environment Variables
+- Middleware
+- Production Folder Structure
 
 ---
 
-# 🎯 Purpose
+# 📸 Screenshots
 
-This repository was created to:
+You can add screenshots or GIFs here later.
 
-- Learn backend development by building projects
-- Practice Node.js concepts
-- Explore different backend architectures
-- Experiment with modern backend technologies
-- Prepare for interviews
-- Serve as a reusable reference for future projects
+```
+docs/
+├── graphql.png
+├── websocket.gif
+└── authentication.png
+```
 
 ---
 
@@ -202,32 +231,15 @@ This repository was created to:
 
 Contributions are welcome.
 
-If you'd like to improve any project, fix bugs, or add new backend concepts, feel free to fork the repository and submit a Pull Request.
+If you find a bug or want to improve any project:
+
+1. Fork the repository
+2. Create a new branch
+3. Commit your changes
+4. Open a Pull Request
 
 ---
 
 # ⭐ Support
 
-If you found this repository useful:
-
-⭐ Star the repository
-
-🍴 Fork it
-
-🧑‍💻 Share it with other developers
-
----
-
-# 📜 License
-
-This project is licensed under the **MIT License**.
-
----
-
-<div align="center">
-
-### Happy Coding ❤️
-
-**Made with Node.js & lots of curiosity.**
-
-</div>
+If this repository helped you learn backend development, consider giving it a ⭐ on GitHub.
