@@ -10,6 +10,7 @@ if (cluster.isPrimary) {
   const app = express();
   app.get("/", (req, res) => {
     res.send(`Running ${process.pid}`);
+    cluster.fork();
   });
 
   app.listen(3000);
