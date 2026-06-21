@@ -3,9 +3,11 @@ const app = express();
 const port = 3000;
 const connectToDb = require("./src/DB/connect");
 const adminRoutes = require("./src/routes/admin");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 connectToDb();
+app.use(cookieParser());
 app.use(express.json());
 app.use("/admin", adminRoutes);
 
