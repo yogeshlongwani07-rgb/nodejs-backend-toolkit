@@ -17,4 +17,23 @@ async function createMovieListing(req, res) {
   }
 }
 
-module.exports = { createMovieListing };
+async function updateMovieListing(req, res) {
+  try {
+    const id = req.params.id;
+    const movie = await Movie.findByIdAndUpdate(id, req.body, {
+      runValidators: true,
+    });
+    if (!movie)
+      return res
+        .status(404)
+        .json({ message: "Movie not Found", success: false });
+
+    res.json({ message: "Movie Updated", success: true });
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({ message: "Unexpected Error" });
+    success: false;
+  }
+}
+
+module.exports = { createMovieListing, updateMovieListing };
