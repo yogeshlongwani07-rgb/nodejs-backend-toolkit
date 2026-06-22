@@ -131,6 +131,20 @@ async function bookMovieShow(req, res) {
   }
 }
 
+async function getMovieOwner(req, res) {
+  try {
+    const movieId = req.params.id;
+    const movie = await Movie.findById(movieId).populate(
+      "createdBy",
+      "name email",
+    );
+    res.status(200).json({ owner: movie.createdBy });
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({ message: "Unexpected Error", success: false });
+  }
+}
+
 module.exports = {
   createMovieListing,
   updateMovieListing,
@@ -138,4 +152,5 @@ module.exports = {
   allMovies,
   checkAvailableShows,
   bookMovieShow,
+  getMovieOwner,
 };

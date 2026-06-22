@@ -10,6 +10,7 @@ const {
   deleteMovieListing,
   checkAvailableShows,
   bookMovieShow,
+  getMovieOwner,
 } = require("../controllers/Movie-listing-controller");
 
 //Movies CRUD
@@ -21,4 +22,5 @@ router.delete("/delete/:id", isLoggedIn, isAdmin, deleteMovieListing);
 //Movies Details
 router.get("/shows", isLoggedIn, checkAvailableShows);
 router.post("/shows/booking", isLoggedIn, isUser, bookMovieShow);
+router.get("/owner/:id", getMovieOwner);
 module.exports = router;
