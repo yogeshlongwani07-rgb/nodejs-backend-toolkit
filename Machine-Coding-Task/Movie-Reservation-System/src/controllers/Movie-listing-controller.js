@@ -1,5 +1,5 @@
 const Movie = require("../models/movie-listing");
-const { Admin } = require("../models/user-admin");
+const { Admin, User } = require("../models/user-admin");
 
 async function createMovieListing(req, res) {
   try {
@@ -96,10 +96,46 @@ async function checkAvailableShows(req, res) {
   }
 }
 
+async function bookMovieShow(req, res) {
+  try {
+    const { movieId, showId, seats } = req.body;
+    let movie = await Movie.findById(movieId);
+    if (!movie)
+      return res
+        .status(404)
+        .json({ message: "Movie not Found", success: false });
+    const show = movie.shows.id(showId);
+    if (!show)
+      return res
+        .status(404)
+        .json({ message: "Show not Found", success: false });
+    if (show.availableSeats < seats)
+      return res
+        .status(400)
+        .json({ message: "Not enough seats available", success: false });
+
+    const user = await User.findById(req.user._id);
+    if (!user)
+      return res
+        .status(404)
+        .json({ message: "User not Found", success: false });
+    user.bookings.push({ movie: movieId, status: "Confirmed" });
+    show.availableSeats -= seats;
+    await user.save();
+    await movie.save();
+
+    res.status(200).json({ message: "Show Booked", success: true });
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({ message: "Unexpected Error", success: false });
+  }
+}
+
 module.exports = {
   createMovieListing,
   updateMovieListing,
   deleteMovieListing,
   allMovies,
   checkAvailableShows,
+  bookMovieShow,
 };

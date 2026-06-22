@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
         },
         status: {
           type: String,
-          enum: ["Failed", "Confirmed", "Cancelled"],
+          enum: ["Confirmed", "Cancelled"],
           default: "Confirmed",
         },
       },
