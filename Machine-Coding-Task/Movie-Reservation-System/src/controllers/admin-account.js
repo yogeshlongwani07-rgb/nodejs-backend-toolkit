@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Admin } = require("../models/admin");
+const Movie = require("../models/movie-listing");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
@@ -117,4 +118,25 @@ async function loginAdmin(req, res) {
   }
 }
 
-module.exports = { registerAdmin, loginAdmin };
+async function deleteAdmin(req, res) {
+  try {
+    let id = req.params.id;
+    await Movie.deleteMany({
+      createdBy: id,
+    });
+    const admin = await Admin.findByIdAndDelete(id);
+
+    res.json({
+      success: true,
+      message: "Admin and all movies deleted",
+    });
+  } catch (err) {
+    console.log("error", err);
+    return res.status(500).json({
+      message: "Unexpected Error",
+      success: false,
+    });
+  }
+}
+
+module.exports = { registerAdmin, loginAdmin, deleteAdmin };
