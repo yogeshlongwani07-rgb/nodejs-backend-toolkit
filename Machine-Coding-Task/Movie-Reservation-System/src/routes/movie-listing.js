@@ -7,11 +7,16 @@ const {
   allMovies,
   updateMovieListing,
   deleteMovieListing,
+  checkAvailableShows,
 } = require("../controllers/Movie-listing-controller");
 
-router.post("/add", isLoggedIn, isAdmin, createMovieListing);
+//Movies CRUD
 router.get("/", allMovies);
+router.post("/add", isLoggedIn, isAdmin, createMovieListing);
 router.put("/edit/:id", isLoggedIn, isAdmin, updateMovieListing);
 router.delete("/delete/:id", isLoggedIn, isAdmin, deleteMovieListing);
+
+//Movies Details
+router.get("/shows", checkAvailableShows);
 
 module.exports = router;

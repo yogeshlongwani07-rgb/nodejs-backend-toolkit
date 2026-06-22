@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema(
     shows: [
       {
         showTime: {
-          type: String,
+          type: String, // "23:00"
           required: true,
         },
         date: {
