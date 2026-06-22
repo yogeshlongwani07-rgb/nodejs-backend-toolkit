@@ -17,6 +17,6 @@ router.put("/edit/:id", isLoggedIn, isAdmin, updateMovieListing);
 router.delete("/delete/:id", isLoggedIn, isAdmin, deleteMovieListing);
 
 //Movies Details
-router.get("/shows", checkAvailableShows);
+router.get("/shows", isLoggedIn, checkAvailableShows);
 
 module.exports = router;
