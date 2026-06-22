@@ -155,4 +155,44 @@ async function checkMyBookings(req, res) {
   }
 }
 
-module.exports = { registerUser, loginUser, deleteUser, checkMyBookings };
+async function cancelBooking(req, res) {
+  try {
+    const bookingId = req.params.bookingId;
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+    const bookingIndex = user.bookings.findIndex(
+      (booking) => booking._id.toString() === bookingId,
+    );
+    if (bookingIndex === -1) {
+      return res.status(404).json({
+        message: "Booking not found",
+        success: false,
+      });
+    }
+    user.bookings[bookingIndex].status = "Cancelled";
+    await user.save();
+    res.json({
+      success: true,
+      message: "Booking cancelled",
+    });
+  } catch (err) {
+    console.log("error", err);
+    return res.status(500).json({
+      message: "Unexpected Error",
+      success: false,
+    });
+  }
+}
+
+module.exports = {
+  registerUser,
+  loginUser,
+  deleteUser,
+  checkMyBookings,
+  cancelBooking,
+};

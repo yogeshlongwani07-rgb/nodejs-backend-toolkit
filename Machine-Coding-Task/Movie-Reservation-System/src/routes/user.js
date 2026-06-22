@@ -7,12 +7,14 @@ const {
   loginUser,
   deleteUser,
   checkMyBookings,
+  cancelBooking,
 } = require("../controllers/user-account");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/delete/:id", deleteUser);
 router.get("/my-bookings", isLoggedIn, isUser, checkMyBookings);
+router.post("/cancel-booking/:bookingId", isLoggedIn, isUser, cancelBooking);
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
