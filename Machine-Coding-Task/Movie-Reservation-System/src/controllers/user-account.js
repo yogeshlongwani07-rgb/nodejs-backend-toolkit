@@ -135,4 +135,24 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { registerUser, loginUser, deleteUser };
+async function checkMyBookings(req, res) {
+  try {
+    const userId = req.user._id;
+    const user = await User.findById(userId).populate("bookings");
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+    res.status(200).json({ bookings: user.bookings });
+  } catch (err) {
+    console.log("error", err);
+    return res.status(500).json({
+      message: "Unexpected Error",
+      success: false,
+    });
+  }
+}
+
+module.exports = { registerUser, loginUser, deleteUser, checkMyBookings };

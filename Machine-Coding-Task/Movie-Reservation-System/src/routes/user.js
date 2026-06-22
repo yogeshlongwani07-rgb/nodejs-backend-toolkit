@@ -1,14 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const { isLoggedIn } = require("../middleware/auth");
+const { isUser } = require("../middleware/user-auth");
 const {
   registerUser,
   loginUser,
   deleteUser,
+  checkMyBookings,
 } = require("../controllers/user-account");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/delete/:id", deleteUser);
+router.get("/my-bookings", isLoggedIn, isUser, checkMyBookings);
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
