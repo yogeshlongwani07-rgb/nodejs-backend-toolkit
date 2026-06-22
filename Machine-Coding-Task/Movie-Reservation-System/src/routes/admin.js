@@ -49,7 +49,7 @@ router.post("/register", async (req, res) => {
     });
     const SECRET = process.env.SECRET_JWT;
     const token = jwt.sign(
-      { role: newAdmin.role, email: newAdmin.email },
+      { role: newAdmin.role, email: newAdmin.email, _id: newAdmin._id },
       SECRET,
       { expiresIn: "7h" },
     );
@@ -91,9 +91,13 @@ router.post("/login", async (req, res) => {
         .json({ message: "Invalid Credentials", success: false });
 
     const SECRET = process.env.SECRET_JWT;
-    const token = jwt.sign({ role: "admin", email: admin.email }, SECRET, {
-      expiresIn: "7h",
-    });
+    const token = jwt.sign(
+      { _id: admin._id, role: "admin", email: admin.email },
+      SECRET,
+      {
+        expiresIn: "7h",
+      },
+    );
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

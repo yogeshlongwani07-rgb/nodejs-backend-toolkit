@@ -2,7 +2,10 @@ const Movie = require("../models/movie-listing");
 
 async function createMovieListing(req, res) {
   try {
-    const listing = await Movie.create(req.body);
+    const listing = await Movie.create({
+      ...req.body,
+      createdBy: req.user._id,
+    });
     res.status(201).json({ message: "Movie added", success: true });
   } catch (err) {
     console.log("error", err);
