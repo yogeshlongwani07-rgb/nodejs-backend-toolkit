@@ -1,5 +1,5 @@
 const Movie = require("../models/movie-listing");
-const { Admin } = require("../models/admin");
+const { Admin } = require("../models/user-admin");
 
 async function createMovieListing(req, res) {
   try {

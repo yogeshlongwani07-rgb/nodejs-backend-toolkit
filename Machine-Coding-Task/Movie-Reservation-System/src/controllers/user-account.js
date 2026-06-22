@@ -1,19 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const { Admin } = require("../models/user-admin");
-const Movie = require("../models/movie-listing");
+const { User } = require("../models/user-admin");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
-async function registerAdmin(req, res) {
+async function registerUser(req, res) {
   try {
-    const { name, password, email, role } = req.body;
-    if (!role)
-      return res.status(403).json({
-        success: false,
-        message: "Unauthorized. Only administrators can create admin accounts.",
-      });
+    const { name, password, email } = req.body;
 
     if (!name || !password || !email)
       return res
@@ -26,7 +18,7 @@ async function registerAdmin(req, res) {
         message: "Invalid email address",
       });
 
-    const duplicateEmail = await Admin.findOne({ email });
+    const duplicateEmail = await User.findOne({ email });
 
     if (duplicateEmail)
       return res
@@ -42,18 +34,15 @@ async function registerAdmin(req, res) {
 
     const hashPassword = await bcrypt.hash(password, saltRounds);
 
-    const newAdmin = await Admin.create({
+    const newUser = await User.create({
       name,
       password: hashPassword,
       email,
-      role,
     });
     const SECRET = process.env.SECRET_JWT;
-    const token = jwt.sign(
-      { role: newAdmin.role, email: newAdmin.email, _id: newAdmin._id },
-      SECRET,
-      { expiresIn: "7h" },
-    );
+    const token = jwt.sign({ email: newUser.email, _id: newUser._id }, SECRET, {
+      expiresIn: "7h",
+    });
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -72,33 +61,34 @@ async function registerAdmin(req, res) {
   }
 }
 
-async function loginAdmin(req, res) {
+async function loginUser(req, res) {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
+    if (role)
+      return res.status(403).json({
+        message: "You are not authorized to create admin account",
+        success: false,
+      });
     if (!email || !password)
       return res
         .status(400)
         .json({ message: "Missing required field", success: false });
 
-    const admin = await Admin.findOne({ email });
-    if (!admin)
+    const user = await User.findOne({ email });
+    if (!user)
       return res
         .status(400)
-        .json({ message: "Admin not found", success: false });
-    const validatePassword = await bcrypt.compare(password, admin.password);
+        .json({ message: "User not found", success: false });
+    const validatePassword = await bcrypt.compare(password, user.password);
     if (!validatePassword)
       return res
         .status(400)
         .json({ message: "Invalid Credentials", success: false });
 
     const SECRET = process.env.SECRET_JWT;
-    const token = jwt.sign(
-      { _id: admin._id, role: "admin", email: admin.email },
-      SECRET,
-      {
-        expiresIn: "7h",
-      },
-    );
+    const token = jwt.sign({ _id: user._id, email: user.email }, SECRET, {
+      expiresIn: "7h",
+    });
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -118,17 +108,15 @@ async function loginAdmin(req, res) {
   }
 }
 
-async function deleteAdmin(req, res) {
+async function deleteUser(req, res) {
   try {
     let id = req.params.id;
-    await Movie.deleteMany({
-      createdBy: id,
-    });
-    const admin = await Admin.findByIdAndDelete(id);
+
+    const user = await User.findByIdAndDelete(id);
 
     res.json({
       success: true,
-      message: "Admin and all movies deleted",
+      message: "User deleted",
     });
   } catch (err) {
     console.log("error", err);
@@ -139,4 +127,4 @@ async function deleteAdmin(req, res) {
   }
 }
 
-module.exports = { registerAdmin, loginAdmin, deleteAdmin };
+module.exports = { registerUser, loginUser, deleteUser };

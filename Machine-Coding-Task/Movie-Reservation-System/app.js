@@ -5,6 +5,7 @@ const connectToDb = require("./src/DB/connect");
 const adminRoutes = require("./src/routes/admin");
 const cookieParser = require("cookie-parser");
 const movieListingRoutes = require("./src/routes/movie-listing");
+const userRoutes = require("./src/routes/user");
 require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 connectToDb();
@@ -12,6 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/admin", adminRoutes);
 app.use("/movie", movieListingRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "All Set" });
