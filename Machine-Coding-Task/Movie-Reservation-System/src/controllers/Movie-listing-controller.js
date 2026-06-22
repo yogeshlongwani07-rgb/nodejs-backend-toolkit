@@ -17,6 +17,16 @@ async function createMovieListing(req, res) {
   }
 }
 
+async function allMovies(req, res) {
+  try {
+    const movie = await Movie.find({});
+    res.status(200).send(movie);
+  } catch (err) {
+    console.log("error", err);
+    res.status(400).json({ message: "Unexpected Error", success: false });
+  }
+}
+
 async function updateMovieListing(req, res) {
   try {
     const id = req.params.id;
@@ -62,4 +72,9 @@ async function deleteMovieListing(req, res) {
   }
 }
 
-module.exports = { createMovieListing, updateMovieListing, deleteMovieListing };
+module.exports = {
+  createMovieListing,
+  updateMovieListing,
+  deleteMovieListing,
+  allMovies,
+};
