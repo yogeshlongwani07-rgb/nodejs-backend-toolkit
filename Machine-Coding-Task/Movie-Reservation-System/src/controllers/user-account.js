@@ -2,6 +2,7 @@ const { User } = require("../models/user-admin");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
+const Movie = require("../models/movie-listing");
 
 async function registerUser(req, res) {
   try {
@@ -174,7 +175,22 @@ async function cancelBooking(req, res) {
         success: false,
       });
     }
+    if (user.bookings[bookingIndex].status === "Cancelled") {
+      return res.status(400).json({
+        message: "Booking is already cancelled",
+        success: false,
+      });
+    }
     user.bookings[bookingIndex].status = "Cancelled";
+    const movieID = user.bookings[bookingIndex].movie.toString();
+    const movie = await Movie.findById(movieID);
+    if (movie) {
+      const show = movie.shows.id(user.bookings[bookingIndex].showId);
+      if (show) {
+        show.availableSeats += user.bookings[bookingIndex].seats;
+      }
+    }
+    await movie.save();
     await user.save();
     res.json({
       success: true,

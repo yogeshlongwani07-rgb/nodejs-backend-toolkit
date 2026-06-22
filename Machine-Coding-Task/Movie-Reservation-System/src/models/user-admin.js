@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        showId: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+        },
         status: {
           type: String,
           enum: ["Confirmed", "Cancelled"],
