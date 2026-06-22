@@ -28,6 +28,11 @@ async function updateMovieListing(req, res) {
         .status(404)
         .json({ message: "Movie not Found", success: false });
 
+    if (movie.createdBy.toString() !== req.user._id)
+      return res
+        .status(403)
+        .json({ message: "You are not authorized", success: false });
+
     res.json({ message: "Movie Updated", success: true });
   } catch (err) {
     console.log("error", err);
@@ -44,6 +49,11 @@ async function deleteMovieListing(req, res) {
       return res
         .status(404)
         .json({ message: "Movie not Found", success: false });
+
+    if (movie.createdBy.toString() !== req.user._id)
+      return res
+        .status(403)
+        .json({ message: "You are not authorized", success: false });
 
     res.json({ message: "Movie Deleted", success: true });
   } catch (err) {
