@@ -27,19 +27,34 @@ const movieSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    totalSeats: {
-      type: Number,
-      required: true,
-    },
-    availableSeats: {
-      type: Number,
-      required: true,
-    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Admin",
       required: true,
     },
+    shows: [
+      {
+        showTime: {
+          type: String,
+          required: true,
+        },
+        date: {
+          type: String, // "2026-06-25"
+          required: true,
+        },
+        totalSeats: {
+          type: Number,
+          required: true,
+        },
+        availableSeats: {
+          type: Number,
+          required: true,
+        },
+        screen: {
+          type: String,
+        },
+      },
+    ],
   },
   { timestamps: true },
 );

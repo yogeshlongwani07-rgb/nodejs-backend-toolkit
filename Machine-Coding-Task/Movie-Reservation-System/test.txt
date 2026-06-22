@@ -28,31 +28,6 @@ Modular and maintainable code structure
 Secure and consistent data handling
 Scalable architecture for future enhancements
 
-TECHNOLOGY STACK:
-
-Node.js (Runtime Environment)
-Express.js (Backend Framework)
-JSON File Storage / MongoDB (Database Layer)
-REST API Architecture
-Postman (API Testing Tool)
-
-PROJECT ARCHITECTURE:
-
-movie-reservation-system/
-├── src/
-│ ├── config/ (Database configuration)
-│ ├── controllers/ (Request handling logic)
-│ ├── services/ (Business logic layer)
-│ ├── models/ (Data structure definitions)
-│ ├── routes/ (API endpoints)
-│ ├── middleware/ (Validation & error handling)
-│ ├── utils/ (Helper functions)
-│ ├── data/ (JSON storage / seed data)
-│ ├── app.js (Express app setup)
-│ └── server.js (Server entry point)
-├── package.json
-└── README.md
-
 KEY FEATURES:
 
 Movie management system (CRUD operations)
