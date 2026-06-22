@@ -120,7 +120,7 @@ async function loginAdmin(req, res) {
 
 async function deleteAdmin(req, res) {
   try {
-    let id = req.params.id;
+    let id = req.user._id;
     await Movie.deleteMany({
       createdBy: id,
     });
@@ -140,7 +140,7 @@ async function deleteAdmin(req, res) {
 }
 async function checkListedMovies(req, res) {
   try {
-    const adminId = req.params.id;
+    const adminId = req.user._id;
     const admin = await Admin.findById(adminId).populate("movies");
     if (!admin) {
       return res

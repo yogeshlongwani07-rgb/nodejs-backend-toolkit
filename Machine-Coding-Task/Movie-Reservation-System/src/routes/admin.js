@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const { isLoggedIn } = require("../middleware/auth");
+const { isAdmin } = require("../middleware/admin-perform-auth");
+
 const {
   registerAdmin,
   loginAdmin,
@@ -12,9 +15,9 @@ router.post("/register", registerAdmin);
 
 router.post("/login", loginAdmin);
 
-router.delete("/delete/:id", deleteAdmin);
+router.delete("/delete", isLoggedIn, isAdmin, deleteAdmin);
 
-router.get("/listed-movies/:id", checkListedMovies);
+router.get("/listed-movies", isLoggedIn, isAdmin, checkListedMovies);
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token");

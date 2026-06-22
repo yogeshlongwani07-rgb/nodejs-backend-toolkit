@@ -119,7 +119,7 @@ async function loginUser(req, res) {
 
 async function deleteUser(req, res) {
   try {
-    let id = req.params.id;
+    let id = req.user._id;
 
     const user = await User.findByIdAndDelete(id);
 

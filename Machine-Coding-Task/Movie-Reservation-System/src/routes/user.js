@@ -12,7 +12,7 @@ const {
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.post("/delete/:id", deleteUser);
+router.delete("/delete", isLoggedIn, deleteUser);
 router.get("/my-bookings", isLoggedIn, isUser, checkMyBookings);
 router.post("/cancel-booking/:bookingId", isLoggedIn, isUser, cancelBooking);
 

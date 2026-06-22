@@ -21,6 +21,6 @@ router.delete("/delete/:id", isLoggedIn, isAdmin, deleteMovieListing);
 
 //Movies Details
 router.get("/shows", isLoggedIn, checkAvailableShows);
-router.post("/shows/booking", isLoggedIn, isUser, bookMovieShow);
+router.post("/bookings", isLoggedIn, isUser, bookMovieShow);
 router.get("/owner/:id", getMovieOwner);
 module.exports = router;

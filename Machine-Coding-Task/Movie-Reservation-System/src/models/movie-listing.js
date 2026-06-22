@@ -45,10 +45,12 @@ const movieSchema = new mongoose.Schema(
         totalSeats: {
           type: Number,
           required: true,
+          min: [1, "Total seats must be at least 1"],
         },
         availableSeats: {
           type: Number,
           required: true,
+          min: [0, "Available seats cannot be negative"],
         },
         screen: {
           type: String,
