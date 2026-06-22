@@ -5,9 +5,11 @@ const { isAdmin } = require("../middleware/admin-perform-auth");
 const {
   createMovieListing,
   updateMovieListing,
+  deleteMovieListing,
 } = require("../controllers/Movie-listing-controller");
 
 router.post("/add", isLoggedIn, isAdmin, createMovieListing);
 router.put("/edit/:id", isLoggedIn, isAdmin, updateMovieListing);
+router.delete("/delete/:id", isLoggedIn, isAdmin, deleteMovieListing);
 
 module.exports = router;

@@ -36,4 +36,20 @@ async function updateMovieListing(req, res) {
   }
 }
 
-module.exports = { createMovieListing, updateMovieListing };
+async function deleteMovieListing(req, res) {
+  try {
+    const id = req.params.id;
+    const movie = await Movie.findByIdAndDelete(id);
+    if (!movie)
+      return res
+        .status(404)
+        .json({ message: "Movie not Found", success: false });
+
+    res.json({ message: "Movie Deleted", success: true });
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({ message: "Unexpected Error", success: false });
+  }
+}
+
+module.exports = { createMovieListing, updateMovieListing, deleteMovieListing };
