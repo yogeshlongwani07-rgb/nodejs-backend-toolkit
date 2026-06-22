@@ -138,5 +138,23 @@ async function deleteAdmin(req, res) {
     });
   }
 }
+async function checkListedMovies(req, res) {
+  try {
+    const adminId = req.params.id;
+    const admin = await Admin.findById(adminId).populate("movies");
+    if (!admin) {
+      return res
+        .status(404)
+        .json({ message: "Admin not found", success: false });
+    }
+    res.status(200).json({ movies: admin.movies });
+  } catch (err) {
+    console.log("error", err);
+    return res.status(500).json({
+      message: "Unexpected Error",
+      success: false,
+    });
+  }
+}
 
-module.exports = { registerAdmin, loginAdmin, deleteAdmin };
+module.exports = { registerAdmin, loginAdmin, deleteAdmin, checkListedMovies };
