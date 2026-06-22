@@ -119,7 +119,7 @@ async function bookMovieShow(req, res) {
       return res
         .status(404)
         .json({ message: "User not Found", success: false });
-    user.bookings.push({ movie: movieId, status: "Confirmed" });
+    user.bookings.push({ movie: movieId, status: "Confirmed", seats: seats });
     show.availableSeats -= seats;
     await user.save();
     await movie.save();

@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema(
           ref: "Movie",
           required: true,
         },
+        seats: {
+          type: Number,
+          required: true,
+        },
         status: {
           type: String,
           enum: ["Confirmed", "Cancelled"],
